@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Search Radio Item Form</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+          <!-- Search Unit -->
+          <ion-searchbar 
+              (ionInput)="onSearch($event)" 
+              autocorrect="off" 
+              showCancelButton="focus"
+              placeholder="Search Items">
+          </ion-searchbar>
+          <!-- Radio list -->
+          <ion-list>
+            <ion-radio-group 
+            formControlName="itemName"
+            (ionChange)="getSelected($event, 'selectedUnit')" >
+              <ion-list-header>
+                <ion-label>
+                  Item List
+                </ion-label>
+              </ion-list-header>
+              <ion-item *ngFor="let item of items" lines="none">
+                <ion-label>{{item['name']}}</ion-label>
+                <ion-radio 
+                  [value]="item?.name"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+          <ion-list>
+            <ion-item>
+              <ion-button type="submit"  size="large">Submit</ion-button>
+            </ion-item>
+          </ion-list>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
